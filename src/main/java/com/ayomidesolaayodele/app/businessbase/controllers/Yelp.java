@@ -14,12 +14,12 @@ public class Yelp {
     @Autowired
     YelpService yelpService;
 
-    @GetMapping("/")
-    public ResponseEntity<String> getRestaurants(String location, String type, Integer amount) throws IOException {
+    @GetMapping("/getBusinesses")
+    public ResponseEntity<String> getRestaurants(String location, String businessType, Integer amount) throws IOException {
         location = "NYC";
-        type = "Sushi";
+        businessType = "Sushi";
         amount = 1;
-        return yelpService.getRestaurantsByLocation(location, type, amount);
+        return yelpService.getRestaurantsByLocation(location, businessType, amount);
     }
 
 }

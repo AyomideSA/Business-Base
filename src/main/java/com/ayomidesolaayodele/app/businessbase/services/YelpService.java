@@ -30,13 +30,13 @@ public class YelpService {
         this.yelpAuthorizationRepository = yelpAuthorizationRepository;
     }
 
-    public ResponseEntity<String> getRestaurantsByLocation(String location, String type, int amount) throws IOException {
+    public ResponseEntity<String> getRestaurantsByLocation(String location, String businessType, int amount) throws IOException {
         Optional<YelpAuthorization> yelpAuthorization = yelpAuthorizationRepository.findById("1");
         String client_secret = yelpAuthorization.get().getApi_key();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + client_secret);
         headers.add("accept", "application/json");
-        String url = "https://" + API_HOST + BUSINESS_SEARCH_PATH + "?location=" + location + "&term=" + type + "&sort_by=best_match&limit=" + amount;
+        String url = "https://" + API_HOST + BUSINESS_SEARCH_PATH + "?location=" + location + "&term=" + businessType + "&sort_by=best_match&limit=" + amount;
         HttpEntity<Object> entity = new HttpEntity<Object>(headers);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
